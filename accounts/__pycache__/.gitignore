@@ -1,0 +1,54 @@
+# Скомпилированные Python файлы / оптимизированные / DLL файлы
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C расширения
+*.so
+
+# Дистрибуция / упаковка
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# SQLite 
+*.sqlite3
+*.sqlite3-journal
+
+# Виртуальное окружение
+venv/
+venv_mac_backup/ # Папка бэкапа твоего старого venv
+env/
+.env
+.venv
+
+# Django медиа файлы 
+
+media/
+
+# Лог файлы
+*.log
+local_settings.py
+
+# Файлы IDE / Редактора
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.nj

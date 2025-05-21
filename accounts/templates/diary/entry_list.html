@@ -1,0 +1,52 @@
+
+{% extends 'base.html' %}
+{% load widget_tweaks %} 
+
+{% block title %}My Entries:{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">My Entries:</h2>
+<a class="btn btn-primary mb-3" href="{% url 'entry_create' %}">+ New Entry</a>
+
+
+<form method="get" action="{% url 'entry_list' %}" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search entries by title or content..." value="{{ search_query|default:'' }}">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+    </div>
+</form>
+
+
+{% if search_query %} 
+    <h4 class="mb-3">Search results for: "{{ search_query }}"</h4>
+{% endif %}
+
+{% if entries %}
+    {% for entry in entries %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ entry.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+                {{ entry.created|date:"d M Y H:i" }} 
+                
+            </h6>
+            <p class="card-text">{{ entry.content|truncatewords:30 }}</p>
+            {% if entry.image %}
+                <img src="{{ entry.image.url }}" alt="{{ entry.title }}" class="img-fluid rounded mb-2" style="max-height: 150px; width: auto;">
+            {% endif %}
+            
+            <a href="{% url 'entry_detail' entry.pk %}" class="btn btn-sm btn-outline-info">Read more</a>
+            <a href="{% url 'entry_edit' entry.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
+            <a href="{% url 'entry_delete' entry.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    {% if search_query %}
+        <div class="alert alert-warning">No entries found matching your search criteria.</div>
+    {% else %}
+        <div class="alert alert-info">You don't have any entries yet! Start by creating one.</div>
+    {% endif %}
+{% endif %}
+
+{% endblock %}
